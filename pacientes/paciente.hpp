@@ -1,4 +1,4 @@
-#ifndef PACIENTE_HPP 
+#ifndef PACIENTE_HPP
 #define PACIENTE_HPP 
  
 #include <cstring> 

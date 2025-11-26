@@ -18,28 +18,33 @@ public:
    static void mostrarExito(const char* mensaje); 
    static void pausar(); 
    static void limpiarBuffer(); 
+
    static bool inicializarHeader(const char* nombreArchivo); 
    static ArchivoHeader leerHeader(const char* nombreArchivo); 
-   static bool actualizarHeader(const char* nombreArchivo, ArchivoHeader header); 
+   static bool actualizarHeader(const char* nombreArchivo, ArchivoHeader header);
+
    static bool verificarArchivo(const char* nombreArchivo); 
    static bool inicializarArchivo(const char* nombreArchivo); 
    static bool verificarIntegridadArchivos(); 
+
    static long getPosicionPaciente(int indice); 
    static long getPosicionDoctor(int indice); 
- 
    static long getPosicionCita(int indice); 
    static long getPosicionHistorial(int indice); 
+
    static bool compactarArchivoPacientes(); 
    static bool compactarArchivoDoctores(); 
    static bool compactarArchivoCitas(); 
    static bool compactarArchivoHistoriales(); 
+
    static void hacerRespaldo(); 
    static void restaurarRespaldo(); 
+   
    static void mostrarEstadisticas(); 
    static bool verificarIntegridadReferencial(); 
    static bool repararIntegridadReferencial(); 
    
-   // Métodos para operaciones específicas 
+   // Mï¿½todos para operaciones especï¿½ficas 
    static bool guardarHospital(const Hospital& hospital); 
    static bool cargarHospital( Hospital& hospital); 
    
