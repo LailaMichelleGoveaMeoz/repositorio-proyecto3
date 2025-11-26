@@ -2,6 +2,7 @@
 #include "citas.hpp" 
 #include "../persistencia/constantes.hpp" 
 #include <iostream> 
+#include <iomanip>   // <-- necesario para setw, left, right, setprecision
 #include <fstream> 
 #include <cstring> 
 #include <ctime> 
@@ -129,10 +130,10 @@ bool OperacionesCitas::cancelarCita(int idCita) {
        return false; 
    } 
  
-   // Verificar que la cita no est� ya cancelada 
+   // Verificar que la cita no esté ya cancelada 
  
    if (strcmp(cita.getEstado(), "CANCELADA") == 0) { 
-       mostrarError("La cita ya est� cancelada"); 
+       mostrarError("La cita ya está cancelada"); 
        return false; 
    } 
  
@@ -153,13 +154,13 @@ const char* medicamentos, float costo) {
        return false; 
    } 
  
-   // Verificar que la cita no est� cancelada 
+   // Verificar que la cita no esté cancelada 
    if (strcmp(cita.getEstado(), "CANCELADA") == 0) { 
        mostrarError("No se puede atender una cita cancelada"); 
        return false; 
    } 
  
-   // Actualizar informaci�n de la consulta 
+   // Actualizar información de la consulta 
    cita.setDiagnostico(diagnostico); 
    cita.setTratamiento(tratamiento); 
    cita.setMedicamentos(medicamentos); 
@@ -193,33 +194,33 @@ void OperacionesCitas::listarCitasPendientes() {
    int citasPendientes = 0; 
    Cita cita; 
    
-   cout << "\n+------------------------------------------------------------+" << 
+   cout << "\n╔════════════════════════════════════════════════════════════╗" << 
 endl; 
-   cout << "�                    CITAS PENDIENTES                       �" << endl; 
-   cout << "�-----------------------------------------------------------�" << endl; 
-   cout << "� ID  � PacienteID � DoctorID   � Fecha      � Estado       �" << endl; 
-   cout << "�-----+------------+------------+------------+--------------�" << endl; 
+   cout << "║                    CITAS PENDIENTES                       ║" << endl; 
+   cout << "╠═════╦════════════╦════════════╦════════════╦══════════════╣" << endl; 
+   cout << "║ ID  ║ PacienteID ║ DoctorID   ║ Fecha      ║ Estado       ║" << endl; 
+   cout << "╠═════╬════════════╬════════════╬════════════╬══════════════╣" << endl; 
  
    for (int i = 0; i < header.cantidadRegistros; i++) { 
        archivo.read(reinterpret_cast<char*>(&cita), sizeof(Cita)); 
        if (archivo.fail()) break; 
        
        if (!cita.getEliminado() && strcmp(cita.getEstado(), "PENDIENTE") == 0) { 
-           citasPendientes++; 
-           cout << "� " << setw(3) << left << cita.getId() << " "; 
-           cout << "� " << setw(10) << left << cita.getPacienteID() << " "; 
-           cout << "� " << setw(10) << left << cita.getDoctorID() << " "; 
-           cout << "� " << setw(10) << left << cita.getFecha() << " "; 
-           cout << "� " << setw(12) << left << cita.getEstado() << "�" << endl; 
-       } 
+    citasPendientes++; 
+    cout << "║ " << setw(3) << left << cita.getId() << " "; 
+    cout << "║ " << setw(10) << left << cita.getPacienteID() << " "; 
+    cout << "║ " << setw(10) << left << cita.getDoctorID() << " "; 
+    cout << "║ " << setw(10) << left << cita.getFecha() << " "; 
+    cout << "║ " << setw(12) << left << cita.getEstado() << "║" << endl; 
+}
+
    } 
  
    if (citasPendientes == 0) { 
-       cout << "�              NO HAY CITAS PENDIENTES                 �" << endl; 
+       cout << "║              NO HAY CITAS PENDIENTES                 ║" << endl; 
    } 
  
-   cout << "+-----------------------------------------------------------+" << endl; 
+   cout << "╚═════╩════════════╩════════════╩════════════╩══════════════╝" << endl; 
    cout << "Total de citas pendientes: " << citasPendientes << endl; 
    archivo.close(); 
 } 
-

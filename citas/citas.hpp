@@ -64,6 +64,6 @@ public:
  
    bool validarDatos() const; 
    static size_t obtenerTamano(); 
-; 
+}; 
  
 #endif 
